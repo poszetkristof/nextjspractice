@@ -13,9 +13,9 @@ import { createInvoice } from '@/app/lib/actions';
 import { useFormState } from 'react-dom';
 
 export default function Form({ customers }: { customers: CustomerField[] }) {
-  const initialState = { message: null, errors: {} };
+  const initialState = { errors: { message: null } };
   const [state, dispatch] = useFormState(createInvoice, initialState);
-  console.log(state);
+
   return (
     <form action={dispatch}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
@@ -133,9 +133,9 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
           </div>
         </fieldset>
         <div id="missing-fields-error" aria-live="polite" aria-atomic="true">
-          {state.message &&
-            <p className="mt-2 text-sm text-red-500" key={state.message}>
-              {state.message}
+          {state.errors?.message &&
+            <p className="mt-2 text-sm text-red-500" key={state.errors.message}>
+              {state.errors.message}
             </p>
           }
         </div>
